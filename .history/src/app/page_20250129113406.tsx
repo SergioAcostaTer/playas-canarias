@@ -1,7 +1,7 @@
 "use client";
 import { useContainerDimensions } from "@/hooks/useContainerDimensions";
 import { useGeolocation } from "@uidotdev/usehooks";
-import React, { useEffect } from "react";
+import React from "react";
 import Map from "react-map-gl/maplibre";
 
 export default function Home() {
@@ -15,16 +15,6 @@ export default function Home() {
     zoom: 6,
   });
   const state = useGeolocation();
-
-  useEffect(() => {
-    if (state.latitude && state.longitude) {
-      setViewport({
-        latitude: state.latitude,
-        longitude: state.longitude,
-        zoom: 10,
-      });
-    }
-  }, [state.latitude, state.longitude]);
 
   return (
     <main className="flex flex-col h-full bg-gray-100 flex-1" ref={ref}>

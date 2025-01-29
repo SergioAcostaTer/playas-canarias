@@ -73,11 +73,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${inter.className} font-inter antialiased min-h-dvh md:min-h-screen flex flex-col`}
-      >
+      <body className={`${inter.className} font-inter antialiased min-h-dvh md:min-h-screen flex flex-col`}>
         <Header />
-        {children}
+        <main className="flex flex-col h-full bg-gray-100 flex-1">
+          {children}
+        </main>
       </body>
     </html>
   );

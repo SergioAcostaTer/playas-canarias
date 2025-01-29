@@ -73,9 +73,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${inter.className} font-inter antialiased min-h-dvh md:min-h-screen flex flex-col`}
-      >
+      <body className={`${inter.className} font-inter antialiased min-h-dvh md:min-h-screen`}>
         <Header />
         {children}
       </body>

@@ -8,7 +8,7 @@
   --primary: #f59e0b;
   --header-bg: #f8a314;
   --header-text: #171717;
-  --header-border: #171717;
+  --header-border: #f59e0b;
 }
 
 @media (prefers-color-scheme: light) {
