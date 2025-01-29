@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${inter.className} font-inter antialiased grid grid-rows-[auto,1fr] h-[100dvh] md:h-screen`}
+        className={`${inter.className} font-inter antialiased grid grid-rows-[auto,1fr] h-[100svh] md:h-screen`}
       >
         <Header />
         {children}
