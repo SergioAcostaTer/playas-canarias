@@ -6,9 +6,9 @@ import Map from "react-map-gl/maplibre";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
-  const { width, height } = useContainerDimensions(ref as React.RefObject<HTMLDivElement>);
+  const { width, height } = useContainerDimensions(ref);
 
-  // Estado del viewport
+  // Estado inicial del mapa
   const [viewport, setViewport] = useState({
     latitude: 28,
     longitude: -15.5,
@@ -17,41 +17,27 @@ export default function Home() {
 
   const state = useGeolocation();
 
-  // Solo actualizar el viewport si hay coordenadas válidas
+  // Solo actualiza el viewport si hay coordenadas válidas
   useEffect(() => {
     if (state.latitude !== undefined && state.longitude !== undefined) {
       setViewport((prev) => ({
         ...prev,
-        latitude: state.latitude ?? 28,
-        longitude: state.longitude ?? -15.5,
+        latitude: state.latitude,
+        longitude: state.longitude,
         zoom: 10,
       }));
     }
   }, [state.latitude, state.longitude]);
 
-  // Callback para manejar el movimiento del mapa sin generar un bucle infinito
-  const handleMove = useCallback((evt: { viewState: { latitude: number; longitude: number; zoom: number } }) => {
-    const { latitude, longitude, zoom } = evt.viewState;
-    setViewport((prev) => {
-      if (
-        prev.latitude !== latitude ||
-        prev.longitude !== longitude ||
-        prev.zoom !== zoom
-      ) {
-        return { latitude, longitude, zoom };
-      }
-      return prev; 
-    });
-  }, []);
-
-  // Callback para centrar el mapa en la ubicación del usuario
+  // Callback para centrar en la ubicación del usuario
   const handleLocateMe = useCallback(() => {
     if (state.latitude !== undefined && state.longitude !== undefined) {
-      setViewport({
-        latitude: state.latitude ?? 28,
-        longitude: state.longitude ?? -15.5,
+      setViewport((prev) => ({
+        ...prev,
+        latitude: state.latitude,
+        longitude: state.longitude,
         zoom: 10,
-      });
+      }));
     }
   }, [state.latitude, state.longitude]);
 
@@ -66,7 +52,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Solo renderizar el mapa si tiene dimensiones válidas */}
+      {/* Solo renderiza el mapa si tiene dimensiones válidas */}
       {width > 0 && height > 0 && (
         <Map
           initialViewState={{
@@ -74,8 +60,6 @@ export default function Home() {
             longitude: viewport.longitude,
             zoom: viewport.zoom,
           }}
-          viewState={viewport}
-          onMove={handleMove}
           style={{ width, height }}
           mapStyle="https://api.maptiler.com/maps/streets/style.json?key=bI4oYGzzakPOHE0Vtk5q"
         />

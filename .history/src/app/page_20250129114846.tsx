@@ -22,8 +22,8 @@ export default function Home() {
     if (state.latitude !== undefined && state.longitude !== undefined) {
       setViewport((prev) => ({
         ...prev,
-        latitude: state.latitude ?? 28,
-        longitude: state.longitude ?? -15.5,
+        latitude: state.latitude,
+        longitude: state.longitude,
         zoom: 10,
       }));
     }

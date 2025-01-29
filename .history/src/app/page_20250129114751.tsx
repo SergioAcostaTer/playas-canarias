@@ -6,7 +6,7 @@ import Map from "react-map-gl/maplibre";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
-  const { width, height } = useContainerDimensions(ref as React.RefObject<HTMLDivElement>);
+  const { width, height } = useContainerDimensions(ref);
 
   // Estado del viewport
   const [viewport, setViewport] = useState({
@@ -22,15 +22,15 @@ export default function Home() {
     if (state.latitude !== undefined && state.longitude !== undefined) {
       setViewport((prev) => ({
         ...prev,
-        latitude: state.latitude ?? 28,
-        longitude: state.longitude ?? -15.5,
+        latitude: state.latitude,
+        longitude: state.longitude,
         zoom: 10,
       }));
     }
   }, [state.latitude, state.longitude]);
 
   // Callback para manejar el movimiento del mapa sin generar un bucle infinito
-  const handleMove = useCallback((evt: { viewState: { latitude: number; longitude: number; zoom: number } }) => {
+  const handleMove = useCallback((evt: any) => {
     const { latitude, longitude, zoom } = evt.viewState;
     setViewport((prev) => {
       if (
@@ -40,7 +40,7 @@ export default function Home() {
       ) {
         return { latitude, longitude, zoom };
       }
-      return prev; 
+      return prev; // Evita actualizaciones innecesarias
     });
   }, []);
 
@@ -48,8 +48,8 @@ export default function Home() {
   const handleLocateMe = useCallback(() => {
     if (state.latitude !== undefined && state.longitude !== undefined) {
       setViewport({
-        latitude: state.latitude ?? 28,
-        longitude: state.longitude ?? -15.5,
+        latitude: state.latitude,
+        longitude: state.longitude,
         zoom: 10,
       });
     }
