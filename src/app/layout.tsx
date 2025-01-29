@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
+import "leaflet/dist/leaflet.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -74,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${inter.className} font-inter antialiased min-h-dvh md:min-h-screen flex flex-col overflow-hidden`}
+        className={`${inter.className} font-inter antialiased grid grid-rows-[auto,1fr] h-[100dvh] md:h-screen`}
       >
         <Header />
         {children}
