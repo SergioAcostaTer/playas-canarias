@@ -1,8 +1,12 @@
-[providers.node]
+[providers]
+name = ["node"]
+
+[node]
 version = "20"
 
 [build]
-command = "npm ci --include=dev && npm run build"
+install = "npm ci --include=dev"
+build = "npm run build"
 
 [start]
 command = "npm start"
