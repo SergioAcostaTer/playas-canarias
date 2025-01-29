@@ -1,0 +1,11 @@
+[providers.node]
+version = "20"
+
+[build]
+command = "npm ci --include=dev && npm run build"
+
+[start]
+command = "npm start"
+
+[env]
+NODE_ENV = "production"
