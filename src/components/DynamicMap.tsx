@@ -64,9 +64,9 @@ export default function DynamicMap() {
 
   return (
     <main className="h-screen w-full relative">
-      <div className="p-4 absolute bottom-0 left-0 right-0 bg-gray-900 text-white flex justify-between z-[1000]">
+      <div className="p-4 absolute bottom-14 left-0 right-0 bg-gray-900 text-white flex justify-between z-[1000] h-18">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
           onClick={handleLocateMe}
         >
           Locate Me
